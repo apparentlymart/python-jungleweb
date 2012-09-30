@@ -1,6 +1,5 @@
 
 import opengraph
-from urlparse import urlparse
 from jungleweb.page import Page
 
 
@@ -9,7 +8,7 @@ def fetch_and_extract(url):
     p = Page()
     p.title = data.get("title", None)
     p.description = data.get("description", None)
-    p.url = data.get("url", None)
+    p.canon_url = data.get("url", None)
     p.image_url = data.get("image", None)
     p.ogp_type = data.get("type", None)
     p.fetch_url = data.get("_url", None)

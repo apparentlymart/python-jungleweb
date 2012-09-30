@@ -1,4 +1,5 @@
 
+from urlparse import urlparse
 import publicsuffix
 
 
@@ -8,18 +9,22 @@ _psl = None
 class Page(object):
     title = None
     description = None
-    url = None
+    canon_url = None
     image_url = None
     ogp_type = None
     fetch_url = None
     site_name = None
 
     @property
+    def url(self):
+        if self.canon_url is not None:
+            return self.canon_url
+        else:
+            return self.fetch_url
+
+    @property
     def url_domain(self):
-        url = self.url
-        if url is None:
-            url = self.fetch_url
-        parts = urlparse(url)
+        parts = urlparse(self.url)
         return parts.hostname
 
     @property
